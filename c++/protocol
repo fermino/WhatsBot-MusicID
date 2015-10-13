@@ -10,17 +10,17 @@ WhatsBot MusicID protocol (stdio):
 
 			version: 
 
-				gnsdk:version: <gnsdk version>
-				gnsdk:version: <major.minor.patch.compilation>
+				gnsdkversion: <gnsdk version>
+				gnsdkversion: <major.minor.patch.compilation>
 
-				Example: gnsdk:version:3.07.7.3701
+				Example: gnsdkversion:3.07.7.3701
 
 			builddate: 
 
-				gnsdk:builddate: <gnsdk build date>
-				gnsdk:builddate: <year-month-day hour:minute-timezone>
+				gnsdkbuilddate: <gnsdk build date>
+				gnsdkbuilddate: <year-month-day hour:minute-timezone>
 
-				Example: gnsdk:builddate:2015-07-14 12:38-0700
+				Example: gnsdkbuilddate:2015-07-14 12:38-0700
 
 		status: 
 
@@ -31,21 +31,23 @@ WhatsBot MusicID protocol (stdio):
 
 			Example: status:1;0;0;0
 
-		processing:status: 
+		processingstatus: 
 
-			processing:status: <$status>
-			processing:status: <0-11>
+			processingstatus: <$status>
+			processingstatus: <0-11>
 
 			$status = kStatusProcessingInvalid, kStatusProcessingAudioNone, kStatusProcessingAudioSilence, kStatusProcessingAudioNoise, kStatusProcessingAudioSpeech, kStatusProcessingAudioMusic, kStatusProcessingTransitionNone, kStatusProcessingTransitionChannelChange, kStatusProcessingTransitionContentToContent, kStatusProcessingErrorNoClassifier, kStatusProcessingAudioStarted, kStatusProcessingAudioEnded
 
-		identifying:status: 
+			Example: processingstatus:10
 
-				identifying:status: <$status>
-				identifying:status: <0-7>
+		identifyingstatus: 
+
+				identifyingstatus: <$status>
+				identifyingstatus: <0-7>
 
 				$status = kStatusIdentifyingInvalid, kStatusIdentifyingStarted, kStatusIdentifyingFpGenerated, kStatusIdentifyingLocalQueryStarted, kStatusIdentifyingLocalQueryEnded, kStatusIdentifyingOnlineQueryStarted, kStatusIdentifyingOnlineQueryEnded, kStatusIdentifyingEnded
 
-				Example: identifying:status:1
+				Example: identifyingstatus:1
 		match: 
 
 			match: <artist name> ; <contributor name> ; <album title> ; <track number> ; <track title> ; <track duration>

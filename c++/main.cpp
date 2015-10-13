@@ -28,8 +28,8 @@
 	 * Events
 	 *
 	 * status:<status>;<% complete>;<bytes sent>;<bytes received>
-	 * processing:status:<status>
-	 * identifying:status:<status>
+	 * processingstatus:<status>
+	 * identifyingstatus:<status>
 	 * error:<api>;<code>;<description>
 	 */
 
@@ -45,14 +45,14 @@
 
 		void MusicIdStreamProcessingStatusEvent(GnMusicIdStreamProcessingStatus Status, IGnCancellable& Canceller)
 		{
-			cout << "processing:status:" << Status << endl;
+			cout << "processingstatus:" << Status << endl;
 
 			GNSDK_UNUSED(Canceller);
 		}
 
 		void MusicIdStreamIdentifyingStatusEvent(GnMusicIdStreamIdentifyingStatus Status, IGnCancellable& Canceller)
 		{
-			cout << "identifying:status:" << Status << endl;
+			cout << "identifyingstatus:" << Status << endl;
 
 			if(Status == kStatusIdentifyingEnded)
 				Canceller.SetCancel(true);
@@ -246,8 +246,8 @@
 
 				// Show info
 
-				cout << "gnsdk:version:" << GracenoteManager.ProductVersion() << endl;
-				cout << "gnsdk:builddate:" << GracenoteManager.BuildDate() << endl;
+				cout << "gnsdkversion:" << GracenoteManager.ProductVersion() << endl;
+				cout << "gnsdkbuilddate:" << GracenoteManager.BuildDate() << endl;
 
 				/* Log (debug)
 				 * GnLog Log("log", GnLogFilters().Error().Warning(), GnLogColumns().All(), GnLogOptions().MaxSize(0).Archive(false), GNSDK_NULL);
