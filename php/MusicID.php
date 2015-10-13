@@ -1,4 +1,6 @@
 <?php
+	require_once dirname(__FILE__) . '/MusicIDTrack.php';
+
 	class MusicID
 	{
 		private $ExecutableFileName = 'identifystream';
@@ -8,9 +10,7 @@
 
 		private $LicenseFileName = null;
 
-		private $Delimiter = ';';
-
-		public function __construct($ClientID, $ClientIDTag, $LicenseFileName, $Delimiter = null)
+		public function __construct($ClientID, $ClientIDTag, $LicenseFileName)
 		{
 			if(empty($ClientID) || !is_string($ClientID))
 				throw new Exception('ClientID must be a string');
@@ -22,14 +22,11 @@
 			$this->ClientIDTag = $ClientIDTag;
 
 			$this->LicenseFileName = $LicenseFileName;
-
-			if(!empty($Delimiter))
-				$this->Delimiter = $Delimiter;
 		}
 
-		public function Identify($Stream, $SamplesPerSecond = 44100, $SampleSizeInBits = 16, $NumberOfChannels = 2)
+		public function Identify($FileName, $SamplesPerSecond = 44100, $SampleSizeInBits = 16, $NumberOfChannels = 2, &$Log = array())
 		{
-			$Command = escapeshellcmd(sprintf('./%s %s %s %s %s %s %s %s', $this->ExecutableFileName, $this->ClientID, $this->ClientIDTag, $this->LicenseFileName, (int) $SamplesPerSecond, (int) $SampleSizeInBits, (int) $NumberOfChannels, $this->Delimiter));
+			$Command = sprintf('./%s %s %s %s %s %s %s \; < %s', $this->ExecutableFileName, $this->ClientID, $this->ClientIDTag, $this->LicenseFileName, (int) $SamplesPerSecond, (int) $SampleSizeInBits, (int) $NumberOfChannels, $FileName);
 
 			$Process = proc_open($Command, array(array('pipe', 'r'), array('pipe', 'w'), array('pipe', 'w')), $Std);
 
@@ -38,7 +35,7 @@
 				stream_set_blocking($Std[1], 0);
 				stream_set_blocking($Std[2], 0);
 
-				$Lines = array();
+				$Log = array();
 
 				while(true)
 				{
@@ -51,16 +48,23 @@
 					{
 						$Line = $this->ParseLine($Line);
 
-						$Lines[] = $Line;
+						$Log[] = $Line;
 
-						var_dump($Line);
+						if($Line[0] === 'error' || ($Line[0] === 'status' && (int) $Line[1][1] === 100))
+						{
+							$Matches = array();
 
-						if($Line[0] === 'error' || ($Line[0] === 'status' && (int) $Line[1][0] === 100))
+							foreach($Log as $Line)
+								if($Line[0] === 'match')
+									$Matches[] = new MusicIDTrack($Line[1][0], $Line[1][1], $Line[1][2], $Line[1][3], $Line[1][4], $Line[1][5]);
+
+							if(!empty($Matches))
+								return $Matches;
+
 							break;
+						}
 					}
 				}
-
-				return $Lines;
 			}
 
 			return false;
@@ -74,8 +78,8 @@
 
 			$Command = substr($Line, 0, $Command);
 
-			$Arguments = explode($this->Delimiter, $Arguments);
-			
+			$Arguments = explode(';', $Arguments);
+
 			return array($Command, $Arguments);
 		}
 	}
