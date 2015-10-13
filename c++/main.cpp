@@ -181,7 +181,6 @@
 		MusicIDStreamEvents StreamEvents;
 		GnMusicIdStream MusicIDStream(User, kPresetRadio, &StreamEvents);
 
-		MusicIDStream.Options().ResultSingle(true);
 		MusicIDStream.AudioProcessStart(AudioSource);
 		MusicIDStream.IdentifyAlbum();
 	}
