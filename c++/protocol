@@ -1,0 +1,59 @@
+WhatsBot MusicID protocol (stdio): 
+
+	in: 
+
+		<raw music data>
+
+	out:
+
+		gnsdk: 
+
+			version: 
+
+				gnsdk:version: <gnsdk version>
+				gnsdk:version: <major.minor.patch.compilation>
+
+				Example: gnsdk:version:3.07.7.3701
+
+			builddate: 
+
+				gnsdk:builddate: <gnsdk build date>
+				gnsdk:builddate: <year-month-day hour:minute-timezone>
+
+				Example: gnsdk:builddate:2015-07-14 12:38-0700
+
+		status: 
+
+			status: <$status> ; <% complete> ; <bytes sent> ; <bytes received>
+			status: <0-11>    ; <0-100>      ;              ;                 
+
+			$status = kStatusUnknown, kStatusBegin, kStatusProgress, kStatusComplete, kStatusErrorInfo, kStatusConnecting, kStatusSending, kStatusReceiving, kStatusDisconnected, kStatusReading, kStatusWriting, kStatusCancelled
+
+			Example: status:1;0;0;0
+
+		processing:status: 
+
+			processing:status: <$status>
+			processing:status: <0-11>
+
+			$status = kStatusProcessingInvalid, kStatusProcessingAudioNone, kStatusProcessingAudioSilence, kStatusProcessingAudioNoise, kStatusProcessingAudioSpeech, kStatusProcessingAudioMusic, kStatusProcessingTransitionNone, kStatusProcessingTransitionChannelChange, kStatusProcessingTransitionContentToContent, kStatusProcessingErrorNoClassifier, kStatusProcessingAudioStarted, kStatusProcessingAudioEnded
+
+		identifying:status: 
+
+				identifying:status: <$status>
+				identifying:status: <0-7>
+
+				$status = kStatusIdentifyingInvalid, kStatusIdentifyingStarted, kStatusIdentifyingFpGenerated, kStatusIdentifyingLocalQueryStarted, kStatusIdentifyingLocalQueryEnded, kStatusIdentifyingOnlineQueryStarted, kStatusIdentifyingOnlineQueryEnded, kStatusIdentifyingEnded
+
+				Example: identifying:status:1
+		match: 
+
+			match: <artist name> ; <contributor name> ; <album title> ; <track number> ; <track title> ; <track duration>
+
+			Example: match:Nirvana;Nirvana;Nevermind;1;Smells Like Teen Spirit;92694
+
+		error: 
+
+			error: <api> ; <code> ; <description>
+
+			Example: error:gnsdk_manager_initialize;90800041;license file not found
