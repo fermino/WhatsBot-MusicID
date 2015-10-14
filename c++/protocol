@@ -50,7 +50,7 @@ WhatsBot MusicID protocol (stdio):
 				Example: identifyingstatus:1
 		match: 
 
-			match: <artist name> ; <contributor name> ;<album gracenote id> ; <album title> ; <album track count> ; <album year> ; <track gracenote id> ; <track number> ; <track title> ; <track duration> ; <track match position> ; <track match duration>
+			match: <artist name> ; <contributor name> ; <album gracenote id> ; <album title> ; <album track count> ; <album year> ; <track gracenote id> ; <track number> ; <track title> ; <track duration> ; <track match position> ; <track match duration>
 
 			Example: match:Nirvana;Nirvana;2897699-2FAE8F59CCECBA288810EC27DCD56A0A;Nevermind;12;1991;2897700-725B5571F0D7E8E7A5D03EBEAA0D2886;1;Smells Like Teen Spirit;92694;25402;5944
 
