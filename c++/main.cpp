@@ -188,6 +188,8 @@
 	/*
 	 * Show it all!
 	 *
+	 * match:<artist name>;<contributor name>;<album gracenote id>;<album title>;<album track count>;<album year>;<track gracenote id>;<track number>;<track title>;<track duration>;<track match position>;<track match duration>
+
 	 * match:<artist name>;<contributor name>;<album title>;<track number>;<track title>;<track duration>
 	 */
 
@@ -196,7 +198,26 @@
 		album_iterator AlbumIterator = Albums.Albums().begin();
 
 		for( ; AlbumIterator != Albums.Albums().end(); ++AlbumIterator)
-			cout << "match:" << AlbumIterator->Artist().Name().Display() << Delimiter << AlbumIterator->Artist().Contributor().Name().Display() << Delimiter << AlbumIterator->Title().Display() << Delimiter << AlbumIterator->TrackMatched().TrackNumber() << Delimiter << AlbumIterator->TrackMatched().Title().Display() << Delimiter << AlbumIterator->TrackMatched().Duration() << endl;
+			cout << "match:"
+				// Artist data
+				<< AlbumIterator->Artist().Name().Display()                << Delimiter
+				<< AlbumIterator->Artist().Contributor().Name().Display()  << Delimiter
+				// Album data
+				<< AlbumIterator->GnId()                                   << Delimiter
+				<< AlbumIterator->Title().Display()                        << Delimiter
+				<< AlbumIterator->TrackCount()                             << Delimiter
+				<< AlbumIterator->Year()                                   << Delimiter
+				//<< AlbumIterator->CoverArt().ContentType()                 << Delimiter
+				//<< AlbumIterator->CoverArt().MimeType()                    << Delimiter
+				//<< AlbumIterator->CoverArt().Asset().Bytes()               << Delimiter
+				//<< AlbumIterator->CoverArt().Asset().Url()                 << Delimiter
+				// Track data
+				<< AlbumIterator->TrackMatched().GnId()                    << Delimiter
+				<< AlbumIterator->TrackMatched().TrackNumber()             << Delimiter
+				<< AlbumIterator->TrackMatched().Title().Display()         << Delimiter
+				<< AlbumIterator->TrackMatched().Duration()                << Delimiter
+				<< AlbumIterator->TrackMatched().MatchPosition()           << Delimiter
+				<< AlbumIterator->TrackMatched().MatchDuration()           << endl;
 	}
 
 	/*
