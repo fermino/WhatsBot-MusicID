@@ -19,6 +19,10 @@
 
 	cp ./php/*.php           ./build/MusicID/
 
+	# Audio samples
+
+	cp ./samples/*           ./build/MusicID/
+
 	# Ready!
 
 	cd ./build/
