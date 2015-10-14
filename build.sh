@@ -17,7 +17,7 @@
 
 	# PHP app
 
-	cp ./php/*.php               ./build/MusicID/
+	cp ./php/*.php           ./build/MusicID/
 
 	# Ready!
 

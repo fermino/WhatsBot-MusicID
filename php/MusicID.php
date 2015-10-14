@@ -25,7 +25,7 @@
 		}
 
 		public function Identify($FileName, $SamplesPerSecond = 44100, $SampleSizeInBits = 16, $NumberOfChannels = 2, &$Log = array())
-		{
+		{ // Use popen instead proc_open, we just need to use process' stdout
 			$Command = sprintf('./%s %s %s %s %s %s %s \; < %s', $this->ExecutableFileName, $this->ClientID, $this->ClientIDTag, $this->LicenseFileName, (int) $SamplesPerSecond, (int) $SampleSizeInBits, (int) $NumberOfChannels, $FileName);
 
 			$Process = proc_open($Command, array(array('pipe', 'r'), array('pipe', 'w'), array('pipe', 'w')), $Std);
