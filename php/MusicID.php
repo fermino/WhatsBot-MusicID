@@ -78,12 +78,19 @@
 		{
 			$Command = strpos($Line, ':');
 
-			$Arguments = substr($Line, $Command + 1);
+			if($Command !== false)
+			{
+				$Arguments = substr($Line, $Command + 1);
+				$Command = substr($Line, 0, $Command);
 
-			$Command = substr($Line, 0, $Command);
+				if($Arguments !== false && $Command !== false)
+				{
+					$Arguments = explode(';', $Arguments);
 
-			$Arguments = explode(';', $Arguments);
+					return array($Command, $Arguments);
+				}
+			}
 
-			return array($Command, $Arguments);
+			return false;
 		}
 	}
