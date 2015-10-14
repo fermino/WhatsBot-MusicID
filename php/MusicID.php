@@ -52,6 +52,8 @@
 
 						if($Line[0] === 'error' || ($Line[0] === 'status' && (int) $Line[1][1] === 100))
 						{
+							proc_close($Process);
+
 							$Matches = array();
 
 							foreach($Log as $Line)
