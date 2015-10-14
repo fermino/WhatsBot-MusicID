@@ -189,8 +189,6 @@
 	 * Show it all!
 	 *
 	 * match:<artist name>;<contributor name>;<album gracenote id>;<album title>;<album track count>;<album year>;<track gracenote id>;<track number>;<track title>;<track duration>;<track match position>;<track match duration>
-
-	 * match:<artist name>;<contributor name>;<album title>;<track number>;<track title>;<track duration>
 	 */
 
 	void DisplayResponse(GnResponseAlbums Albums)
