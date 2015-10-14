@@ -58,7 +58,7 @@
 
 							foreach($Log as $Line)
 								if($Line[0] === 'match')
-									$Matches[] = new MusicIDTrack($Line[1][0], $Line[1][1], $Line[1][2], $Line[1][3], $Line[1][4], $Line[1][5]);
+									$Matches[] = new MusicIDTrack($Line[1][0], $Line[1][1], $Line[1][2], $Line[1][3], $Line[1][4], $Line[1][5], $Line[1][6], $Line[1][7], $Line[1][8], $Line[1][9], $Line[1][10], $Line[1][11]);
 
 							if(!empty($Matches))
 								return $Matches;
